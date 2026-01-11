@@ -70,6 +70,9 @@
 
     main {
       padding: 24px 8vw 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
     }
 
     .badge {
@@ -81,37 +84,85 @@
       background: rgba(76, 201, 240, 0.18);
       color: var(--accent-2);
       font-size: 0.85rem;
-      margin-bottom: 14px;
+      width: fit-content;
     }
 
-    .grid {
-      display: grid;
-      gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    }
-
-    .card {
+    .gate-section {
       background: var(--card);
-      border-radius: 16px;
-      padding: 20px;
+      border-radius: 18px;
+      padding: 22px;
       border: 1px solid rgba(128, 255, 219, 0.15);
       box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
 
-    .card h3 {
-      margin-bottom: 8px;
+    .gate-section h2 {
       color: var(--accent-2);
+      font-size: clamp(1.5rem, 2.2vw, 2rem);
     }
 
-    .note {
+    .gate-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      align-items: start;
+    }
+
+    .gate-details {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      color: var(--text);
+      padding-left: 0;
+    }
+
+    .gate-details strong {
+      color: var(--accent);
+    }
+
+    .gate-text {
+      color: var(--text);
+    }
+
+    .gate-text p {
+      margin-top: 10px;
+    }
+
+    .gate-media {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .gate-figure {
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 12px;
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: center;
+    }
+
+    .gate-figure img {
+      width: 100%;
+      border-radius: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+      background: #fff;
+    }
+
+    .gate-figure figcaption {
       color: var(--muted);
+      font-size: 0.9rem;
       margin-top: 8px;
     }
 
     .truth-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 12px;
+      margin-top: 10px;
       font-size: 0.95rem;
       color: var(--text);
     }
@@ -128,18 +179,8 @@
       color: var(--accent-2);
     }
 
-    .media {
-      display: grid;
-      gap: 16px;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      margin-top: 20px;
-    }
-
-    .media img {
-      width: 100%;
-      border-radius: 12px;
-      border: 2px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+    .application {
+      color: var(--muted);
     }
   </style>
 </head>
@@ -161,95 +202,286 @@
   </header>
 
   <main>
-    <p class="badge">Nhóm cổng cơ bản</p>
-    <div class="grid">
-      <div class="card">
-        <h3>OR</h3>
-        <p>Đầu ra = 1 nếu ít nhất một đầu vào = 1.</p>
+    <span class="badge">Nhóm cổng cơ bản (trình bày theo thứ tự từ trên xuống)</span>
+
+    <section class="gate-section" id="or">
+      <h2>1. Cổng OR</h2>
+      <div class="gate-content">
+        <div class="gate-text">
+          <ul class="gate-details">
+            <li><strong>Hàm logic:</strong> y = x₁ + x₂</li>
+            <li><strong>Kí hiệu logic:</strong> cổng OR cho đầu ra y = 1 khi ít nhất một đầu vào bằng 1.</li>
+          </ul>
+          <p>Khi ít nhất một trong hai lối vào x₁ và x₂ bằng 1 thì lối ra y bằng 1. Còn khi cả hai lối vào bằng 0 thì lối ra bằng 0.</p>
+          <p class="application"><strong>Công dụng:</strong> Kết hợp nhiều tín hiệu đầu vào thành một tín hiệu đầu ra, dùng trong mạch cộng logic, mạch điều khiển đóng/ngắt.</p>
+        </div>
+        <div>
+          <h3>Bảng chân lí cổng OR</h3>
+          <table class="truth-table">
+            <thead>
+              <tr>
+                <th>x₁</th>
+                <th>x₂</th>
+                <th>y</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="card">
-        <h3>AND</h3>
-        <p>Đầu ra = 1 khi tất cả đầu vào = 1.</p>
+      <div class="gate-media">
+        <figure class="gate-figure">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Logic-gate-or.svg" alt="Kí hiệu cổng OR" />
+          <figcaption>Hình 21.6. Kí hiệu cổng OR</figcaption>
+        </figure>
+        <figure class="gate-figure">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/59/74LS32AN.jpg" alt="IC 74LS32 chứa 4 cổng OR" />
+          <figcaption>Hình 21.7. IC tích hợp 4 cổng OR (74LS32)</figcaption>
+        </figure>
       </div>
-      <div class="card">
-        <h3>NOT</h3>
-        <p>Đảo trạng thái: 0 thành 1, 1 thành 0.</p>
+    </section>
+
+    <section class="gate-section" id="and">
+      <h2>2. Cổng AND</h2>
+      <div class="gate-content">
+        <div class="gate-text">
+          <ul class="gate-details">
+            <li><strong>Hàm logic:</strong> y = x₁ · x₂</li>
+            <li><strong>Kí hiệu logic:</strong> cổng AND cho đầu ra y = 1 khi cả hai đầu vào đều bằng 1.</li>
+          </ul>
+          <p>Khi cả hai lối vào x₁ và x₂ bằng 1 thì lối ra y bằng 1. Còn khi ít nhất một lối vào bằng 0 thì lối ra bằng 0.</p>
+          <p class="application"><strong>Công dụng:</strong> Dùng trong mạch nhân tín hiệu, mạch điều khiển đóng/ngắt và kết hợp điều kiện logic.</p>
+        </div>
+        <div>
+          <h3>Bảng chân lí cổng AND</h3>
+          <table class="truth-table">
+            <thead>
+              <tr>
+                <th>x₁</th>
+                <th>x₂</th>
+                <th>y</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="card">
-        <h3>NOR</h3>
-        <p>Phủ định của OR: chỉ cho ra 1 khi tất cả đầu vào = 0.</p>
+      <div class="gate-media">
+        <figure class="gate-figure">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Logic-gate-and.svg" alt="Kí hiệu cổng AND" />
+          <figcaption>Hình 21.8. Kí hiệu cổng AND</figcaption>
+        </figure>
+        <figure class="gate-figure">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/74LS08AN.jpg" alt="IC 74LS08 chứa 4 cổng AND" />
+          <figcaption>Hình 21.9. IC tích hợp 4 cổng AND (74LS08)</figcaption>
+        </figure>
       </div>
-      <div class="card">
-        <h3>NAND</h3>
-        <p>Phủ định của AND: cho ra 0 khi tất cả đầu vào = 1.</p>
+    </section>
+
+    <section class="gate-section" id="not">
+      <h2>3. Cổng NOT</h2>
+      <div class="gate-content">
+        <div class="gate-text">
+          <ul class="gate-details">
+            <li><strong>Hàm logic:</strong> y = x̅</li>
+            <li><strong>Kí hiệu logic:</strong> cổng NOT đảo trạng thái đầu vào.</li>
+          </ul>
+          <p>Lối ra y luôn ở trạng thái ngược (đảo) với lối vào x.</p>
+          <p class="application"><strong>Công dụng:</strong> Đảo mức logic trong các mạch điện tử, mạch cảm biến, và tạo tín hiệu điều khiển ngược.</p>
+        </div>
+        <div>
+          <h3>Bảng chân lí cổng NOT</h3>
+          <table class="truth-table">
+            <thead>
+              <tr>
+                <th>x</th>
+                <th>y</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="card" style="margin-top: 20px;">
-      <h3>Bảng chân trị tổng hợp</h3>
-      <p class="note">A, B là hai đầu vào; các cột cho biết đầu ra của từng cổng.</p>
-      <div style="overflow-x: auto;">
-        <table class="truth-table">
-          <thead>
-            <tr>
-              <th>A</th>
-              <th>B</th>
-              <th>OR</th>
-              <th>AND</th>
-              <th>NOR</th>
-              <th>NAND</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
-              <td>1</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>0</td>
-              <td>1</td>
-              <td>1</td>
-              <td>0</td>
-              <td>0</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>0</td>
-              <td>1</td>
-              <td>0</td>
-              <td>0</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>0</td>
-              <td>0</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="gate-media">
+        <figure class="gate-figure">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Logic-gate-not.svg" alt="Kí hiệu cổng NOT" />
+          <figcaption>Hình 21.10. Kí hiệu cổng NOT</figcaption>
+        </figure>
+        <figure class="gate-figure">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/74LS04AN.jpg" alt="IC 74LS04 chứa 6 cổng NOT" />
+          <figcaption>Hình 21.11. IC tích hợp 6 cổng NOT (74LS04)</figcaption>
+        </figure>
       </div>
-    </div>
-    <div class="media">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Logic-gate-or.svg"
-        alt="Sơ đồ cổng logic OR"
-      />
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Logic-gate-and.svg"
-        alt="Sơ đồ cổng logic AND"
-      />
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Logic-gate-not.svg"
-        alt="Sơ đồ cổng logic NOT"
-      />
-    </div>
+    </section>
+
+    <section class="gate-section" id="nor">
+      <h2>4. Cổng NOR</h2>
+      <div class="gate-content">
+        <div class="gate-text">
+          <ul class="gate-details">
+            <li><strong>Hàm logic:</strong> y = (x₁ + x₂)̅</li>
+            <li><strong>Kí hiệu logic:</strong> cổng NOR là cổng OR có phủ định ở đầu ra.</li>
+          </ul>
+          <p>Cổng NOR có thể được thiết lập bằng cách mắc nối tiếp một cổng OR với một cổng NOT.</p>
+          <p>Khi ít nhất một trong hai lối vào x₁ và x₂ bằng 1 thì lối ra y bằng 0. Khi cả hai lối vào bằng 0 thì lối ra bằng 1.</p>
+          <p class="application"><strong>Công dụng:</strong> Đảo ngược trạng thái trong mạch logic, kết hợp điều kiện phủ định và tạo tín hiệu điều khiển ngược.</p>
+        </div>
+        <div>
+          <h3>Bảng chân lí cổng NOR</h3>
+          <table class="truth-table">
+            <thead>
+              <tr>
+                <th>x₁</th>
+                <th>x₂</th>
+                <th>y</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="gate-media">
+        <figure class="gate-figure">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Logic-gate-nor.svg" alt="Kí hiệu cổng NOR" />
+          <figcaption>Hình 21.12. Kí hiệu cổng NOR</figcaption>
+        </figure>
+        <figure class="gate-figure">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/74LS02AN.jpg" alt="IC 74LS02 chứa 4 cổng NOR" />
+          <figcaption>Hình 21.14. IC tích hợp 4 cổng NOR (74LS02)</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="gate-section" id="nand">
+      <h2>5. Cổng NAND</h2>
+      <div class="gate-content">
+        <div class="gate-text">
+          <ul class="gate-details">
+            <li><strong>Hàm logic:</strong> y = (x₁ · x₂)̅</li>
+            <li><strong>Kí hiệu logic:</strong> cổng NAND là cổng AND có phủ định ở đầu ra.</li>
+          </ul>
+          <p>Cổng NAND có thể được tạo ra bằng cách mắc nối tiếp một cổng AND với một cổng NOT.</p>
+          <p>Khi cả hai lối vào x₁ và x₂ bằng 1 thì lối ra y bằng 0. Còn khi ít nhất một lối vào bằng 0 thì lối ra bằng 1.</p>
+          <p class="application"><strong>Công dụng:</strong> Đảo ngược trạng thái trong mạch nhân logic, tạo điều kiện phủ định và mạch điều khiển.</p>
+        </div>
+        <div>
+          <h3>Bảng chân lí cổng NAND</h3>
+          <table class="truth-table">
+            <thead>
+              <tr>
+                <th>x₁</th>
+                <th>x₂</th>
+                <th>y</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="gate-media">
+        <figure class="gate-figure">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Logic-gate-nand.svg" alt="Kí hiệu cổng NAND" />
+          <figcaption>Hình 21.15. Kí hiệu cổng NAND</figcaption>
+        </figure>
+        <figure class="gate-figure">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/74LS00AN.jpg" alt="IC 74LS00 chứa 4 cổng NAND" />
+          <figcaption>Hình 21.17. IC tích hợp 4 cổng NAND (74LS00)</figcaption>
+        </figure>
+      </div>
+    </section>
   </main>
 </body>
 </html>
