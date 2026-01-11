@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phần III: Cổng logic cơ bản</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #0b1221;
+      --bg-soft: #111a2f;
+      --card: #162542;
+      --accent: #4cc9f0;
+      --accent-2: #80ffdb;
+      --text: #e6f1ff;
+      --muted: #9fb3c8;
+      --shadow: 0 20px 40px rgba(4, 14, 34, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at top, #1c2f4f 0%, var(--bg) 45%, #060b16 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 48px 10vw 24px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--accent);
+    }
+
+    .page-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(11, 18, 33, 0.92);
+      backdrop-filter: blur(10px);
+      padding: 12px 8vw;
+      border-bottom: 1px solid rgba(76, 201, 240, 0.2);
+    }
+
+    .page-nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      list-style: none;
+      padding-left: 0;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    .page-nav a {
+      color: var(--accent-2);
+      text-decoration: none;
+    }
+
+    .page-nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      padding: 24px 8vw 80px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(76, 201, 240, 0.18);
+      color: var(--accent-2);
+      font-size: 0.85rem;
+      margin-bottom: 14px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid rgba(128, 255, 219, 0.15);
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+      color: var(--accent-2);
+    }
+
+    .note {
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .truth-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .truth-table th,
+    .truth-table td {
+      padding: 10px 12px;
+      border: 1px solid rgba(128, 255, 219, 0.15);
+      text-align: center;
+    }
+
+    .truth-table th {
+      background: rgba(76, 201, 240, 0.15);
+      color: var(--accent-2);
+    }
+
+    .media {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-top: 20px;
+    }
+
+    .media img {
+      width: 100%;
+      border-radius: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <nav class="page-nav">
+    <ul>
+      <li><a href="main.html">Tổng quan</a></li>
+      <li><a href="M%E1%BB%A5c%20ti%C3%AAu.html">Mục tiêu</a></li>
+      <li><a href="Ph%E1%BA%A7n%20I.html">Phần I</a></li>
+      <li><a href="Ph%E1%BA%A7n%20II.html">Phần II</a></li>
+      <li><a href="Luy%E1%BB%87n%20t%E1%BA%ADp.html">Luyện tập</a></li>
+      <li><a href="B%E1%BB%95%20sung.html">Bổ sung</a></li>
+      <li><a href="Ngu%E1%BB%93n%20tham%20kh%E1%BA%A3o.html">Nguồn tham khảo</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>Phần III: Cổng logic cơ bản</h1>
+  </header>
+
+  <main>
+    <p class="badge">Nhóm cổng cơ bản</p>
+    <div class="grid">
+      <div class="card">
+        <h3>OR</h3>
+        <p>Đầu ra = 1 nếu ít nhất một đầu vào = 1.</p>
+      </div>
+      <div class="card">
+        <h3>AND</h3>
+        <p>Đầu ra = 1 khi tất cả đầu vào = 1.</p>
+      </div>
+      <div class="card">
+        <h3>NOT</h3>
+        <p>Đảo trạng thái: 0 thành 1, 1 thành 0.</p>
+      </div>
+      <div class="card">
+        <h3>NOR</h3>
+        <p>Phủ định của OR: chỉ cho ra 1 khi tất cả đầu vào = 0.</p>
+      </div>
+      <div class="card">
+        <h3>NAND</h3>
+        <p>Phủ định của AND: cho ra 0 khi tất cả đầu vào = 1.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top: 20px;">
+      <h3>Bảng chân trị tổng hợp</h3>
+      <p class="note">A, B là hai đầu vào; các cột cho biết đầu ra của từng cổng.</p>
+      <div style="overflow-x: auto;">
+        <table class="truth-table">
+          <thead>
+            <tr>
+              <th>A</th>
+              <th>B</th>
+              <th>OR</th>
+              <th>AND</th>
+              <th>NOR</th>
+              <th>NAND</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>1</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>1</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>0</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="media">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Logic-gate-or.svg"
+        alt="Sơ đồ cổng logic OR"
+      />
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Logic-gate-and.svg"
+        alt="Sơ đồ cổng logic AND"
+      />
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Logic-gate-not.svg"
+        alt="Sơ đồ cổng logic NOT"
+      />
+    </div>
+  </main>
+</body>
+</html>
