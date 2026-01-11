@@ -72,7 +72,7 @@
       padding: 24px 8vw 80px;
     }
 
-    .badge {
+    .section-label {
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -81,13 +81,14 @@
       background: rgba(76, 201, 240, 0.18);
       color: var(--accent-2);
       font-size: 0.85rem;
-      margin-bottom: 14px;
+      margin-bottom: 18px;
     }
 
-    .grid {
-      display: grid;
-      gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    .gate-section {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-bottom: 36px;
     }
 
     .card {
@@ -98,9 +99,15 @@
       box-shadow: var(--shadow);
     }
 
-    .card h3 {
-      margin-bottom: 8px;
+    .gate-header h2 {
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      color: var(--accent);
+    }
+
+    .gate-header p {
       color: var(--accent-2);
+      margin-top: 6px;
+      font-weight: 600;
     }
 
     .note {
@@ -132,7 +139,7 @@
       display: grid;
       gap: 16px;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      margin-top: 20px;
+      margin-top: 12px;
     }
 
     .media img {
@@ -140,6 +147,18 @@
       border-radius: 12px;
       border: 2px solid rgba(255, 255, 255, 0.08);
       box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .formula {
+      font-weight: 600;
+      color: var(--accent-2);
+      margin-top: 6px;
+    }
+
+    .subheading {
+      margin-bottom: 8px;
+      color: var(--accent-2);
+      font-size: 1.05rem;
     }
   </style>
 </head>
@@ -161,95 +180,370 @@
   </header>
 
   <main>
-    <p class="badge">Nhóm cổng cơ bản</p>
-    <div class="grid">
+    <p class="section-label">Nhóm cổng logic cơ bản</p>
+
+    <section id="or" class="gate-section">
+      <header class="gate-header">
+        <h2>1. Cổng OR</h2>
+        <p class="formula">Hàm logic: y = x₁ + x₂</p>
+      </header>
       <div class="card">
-        <h3>OR</h3>
-        <p>Đầu ra = 1 nếu ít nhất một đầu vào = 1.</p>
+        <p class="subheading">Kí hiệu logic</p>
+        <div class="media">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Logic-gate-or.svg"
+            alt="Kí hiệu cổng logic OR"
+          />
+        </div>
+        <p class="note">Hình 21.6. Kí hiệu cổng OR.</p>
       </div>
       <div class="card">
-        <h3>AND</h3>
-        <p>Đầu ra = 1 khi tất cả đầu vào = 1.</p>
+        <p class="subheading">Bảng chân lí của cổng OR</p>
+        <div style="overflow-x: auto;">
+          <table class="truth-table">
+            <thead>
+              <tr>
+                <th>x₁</th>
+                <th>x₂</th>
+                <th>y</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">Bảng 21.3. Bảng chân lí của cổng OR.</p>
       </div>
       <div class="card">
-        <h3>NOT</h3>
-        <p>Đảo trạng thái: 0 thành 1, 1 thành 0.</p>
+        <p>Khi ít nhất một trong hai lối vào x₁ và x₂ bằng 1 thì lối ra y bằng 1. Còn khi cả hai lối vào bằng 0 thì lối ra bằng 0.</p>
+        <div class="media">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/8/83/7400_pinout.png"
+            alt="Sơ đồ chân IC tích hợp (minh hoạ)"
+          />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/4/40/SN74LS32N.jpg"
+            alt="IC OR 74LS32"
+          />
+        </div>
+        <p class="note">Hình 21.7. Sơ đồ chân và IC tích hợp cổng OR (ví dụ IC 74LS32).</p>
       </div>
       <div class="card">
-        <h3>NOR</h3>
-        <p>Phủ định của OR: chỉ cho ra 1 khi tất cả đầu vào = 0.</p>
+        <p class="subheading">Công dụng</p>
+        <p>Cổng OR dùng để cộng logic hai hoặc nhiều tín hiệu đầu vào thành một tín hiệu đầu ra, tạo ra kết quả logic phức tạp từ các tín hiệu đơn giản. Ứng dụng trong mạch cộng tín hiệu, mạch điều khiển đóng/ngắt.</p>
+        <p class="subheading" style="margin-top: 16px;">Luyện tập</p>
+        <p>Vẽ sơ đồ logic của hàm y = (x₁ + x₂) + x₃ sử dụng kí hiệu logic của cổng OR.</p>
+      </div>
+    </section>
+
+    <section id="and" class="gate-section">
+      <header class="gate-header">
+        <h2>2. Cổng AND</h2>
+        <p class="formula">Hàm logic: y = x₁ · x₂</p>
+      </header>
+      <div class="card">
+        <p class="subheading">Kí hiệu logic</p>
+        <div class="media">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Logic-gate-and.svg"
+            alt="Kí hiệu cổng logic AND"
+          />
+        </div>
+        <p class="note">Hình 21.8. Kí hiệu cổng AND.</p>
       </div>
       <div class="card">
-        <h3>NAND</h3>
-        <p>Phủ định của AND: cho ra 0 khi tất cả đầu vào = 1.</p>
+        <p class="subheading">Bảng chân lí của cổng AND</p>
+        <div style="overflow-x: auto;">
+          <table class="truth-table">
+            <thead>
+              <tr>
+                <th>x₁</th>
+                <th>x₂</th>
+                <th>y</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">Bảng 21.4. Bảng chân lí của cổng AND.</p>
       </div>
-    </div>
-    <div class="card" style="margin-top: 20px;">
-      <h3>Bảng chân trị tổng hợp</h3>
-      <p class="note">A, B là hai đầu vào; các cột cho biết đầu ra của từng cổng.</p>
-      <div style="overflow-x: auto;">
-        <table class="truth-table">
-          <thead>
-            <tr>
-              <th>A</th>
-              <th>B</th>
-              <th>OR</th>
-              <th>AND</th>
-              <th>NOR</th>
-              <th>NAND</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
-              <td>1</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>0</td>
-              <td>1</td>
-              <td>1</td>
-              <td>0</td>
-              <td>0</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>0</td>
-              <td>1</td>
-              <td>0</td>
-              <td>0</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>0</td>
-              <td>0</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="card">
+        <p>Khi cả hai lối vào x₁ và x₂ bằng 1 thì lối ra bằng 1. Còn khi ít nhất một trong hai lối vào bằng 0 thì lối ra bằng 0.</p>
+        <div class="media">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/8/83/7400_pinout.png"
+            alt="Sơ đồ chân IC tích hợp (minh hoạ)"
+          />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/f/fc/SN74LS08N.jpg"
+            alt="IC AND 74LS08"
+          />
+        </div>
+        <p class="note">Hình 21.9. Sơ đồ chân và IC tích hợp 4 cổng AND (IC 74LS08).</p>
       </div>
-    </div>
-    <div class="media">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Logic-gate-or.svg"
-        alt="Sơ đồ cổng logic OR"
-      />
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Logic-gate-and.svg"
-        alt="Sơ đồ cổng logic AND"
-      />
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Logic-gate-not.svg"
-        alt="Sơ đồ cổng logic NOT"
-      />
-    </div>
+      <div class="card">
+        <p class="subheading">Công dụng</p>
+        <p>Cổng AND được sử dụng trong việc nhân logic hai hoặc nhiều tín hiệu đầu vào thành một tín hiệu đầu ra, tạo ra kết quả logic phức tạp từ các tín hiệu đơn giản như mạch nhân tín hiệu, mạch điều khiển đóng/ngắt.</p>
+      </div>
+    </section>
+
+    <section id="not" class="gate-section">
+      <header class="gate-header">
+        <h2>3. Cổng NOT</h2>
+        <p class="formula">Hàm logic: y = x̄</p>
+      </header>
+      <div class="card">
+        <p class="subheading">Kí hiệu logic</p>
+        <div class="media">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Logic-gate-not.svg"
+            alt="Kí hiệu cổng logic NOT"
+          />
+        </div>
+        <p class="note">Hình 21.10. Kí hiệu cổng NOT.</p>
+      </div>
+      <div class="card">
+        <p class="subheading">Bảng chân lí của cổng NOT</p>
+        <div style="overflow-x: auto;">
+          <table class="truth-table">
+            <thead>
+              <tr>
+                <th>x</th>
+                <th>y</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">Bảng 21.5. Bảng chân lí của cổng NOT.</p>
+      </div>
+      <div class="card">
+        <p>Lối ra luôn có trạng thái ngược (đảo) với lối vào x. Khi chế tạo các cổng NOT, người ta tích hợp nhiều cổng trên một IC.</p>
+        <div class="media">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/8/83/7400_pinout.png"
+            alt="Sơ đồ chân IC tích hợp (minh hoạ)"
+          />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/7/7d/SN74LS04N.jpg"
+            alt="IC NOT 74LS04"
+          />
+        </div>
+        <p class="note">Hình 21.11. Sơ đồ chân và IC tích hợp 6 cổng NOT (IC 74LS04).</p>
+      </div>
+      <div class="card">
+        <p class="subheading">Công dụng</p>
+        <p>Cổng NOT dùng để đảo ngược trạng thái tín hiệu hoặc điều khiển các tín hiệu logic trong mạch điện tử, mạch cảm biến.</p>
+      </div>
+    </section>
+
+    <section id="nor" class="gate-section">
+      <header class="gate-header">
+        <h2>4. Cổng NOR</h2>
+        <p class="formula">Hàm logic: y = <span style="text-decoration: overline;">x₁ + x₂</span></p>
+      </header>
+      <div class="card">
+        <p class="subheading">Kí hiệu logic</p>
+        <div class="media">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Logic-gate-nor.svg"
+            alt="Kí hiệu cổng logic NOR"
+          />
+        </div>
+        <p class="note">Hình 21.12. Kí hiệu cổng NOR.</p>
+      </div>
+      <div class="card">
+        <p class="subheading">Bảng chân lí của cổng NOR</p>
+        <div style="overflow-x: auto;">
+          <table class="truth-table">
+            <thead>
+              <tr>
+                <th>x₁</th>
+                <th>x₂</th>
+                <th>y</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">Bảng 21.6. Bảng chân lí của cổng NOR.</p>
+      </div>
+      <div class="card">
+        <p>Cổng NOR có thể thiết lập bằng cách mắc nối tiếp một cổng OR với một cổng NOT.</p>
+        <div class="media">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/5/5d/NOR_from_OR_and_NOT.svg"
+            alt="Cấu tạo cổng NOR từ OR và NOT"
+          />
+        </div>
+        <p class="note">Hình 21.13. Cấu tạo cổng NOR từ OR và NOT.</p>
+        <div class="media" style="margin-top: 16px;">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/8/83/7400_pinout.png"
+            alt="Sơ đồ chân IC tích hợp (minh hoạ)"
+          />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/7/77/SN74LS02N.jpg"
+            alt="IC NOR 74LS02"
+          />
+        </div>
+        <p class="note">Hình 21.14. Sơ đồ chân và IC tích hợp 4 cổng NOR (IC 74LS02).</p>
+      </div>
+      <div class="card">
+        <p class="subheading">Công dụng</p>
+        <p>Cổng NOR được sử dụng để đảo ngược trạng thái của mạch cộng logic hoặc điều khiển các tín hiệu logic trong mạch điện tử, mạch cảm biến.</p>
+      </div>
+    </section>
+
+    <section id="nand" class="gate-section">
+      <header class="gate-header">
+        <h2>5. Cổng NAND</h2>
+        <p class="formula">Hàm logic: y = <span style="text-decoration: overline;">x₁ · x₂</span></p>
+      </header>
+      <div class="card">
+        <p class="subheading">Kí hiệu logic</p>
+        <div class="media">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Logic-gate-nand.svg"
+            alt="Kí hiệu cổng logic NAND"
+          />
+        </div>
+        <p class="note">Hình 21.15. Kí hiệu cổng NAND.</p>
+      </div>
+      <div class="card">
+        <p class="subheading">Bảng chân lí của cổng NAND</p>
+        <div style="overflow-x: auto;">
+          <table class="truth-table">
+            <thead>
+              <tr>
+                <th>x₁</th>
+                <th>x₂</th>
+                <th>y</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">Bảng 21.7. Bảng chân lí của cổng NAND.</p>
+      </div>
+      <div class="card">
+        <p>Cổng NAND có thể tạo ra bằng cách mắc nối tiếp một cổng AND với một cổng NOT.</p>
+        <div class="media">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/7/7b/NAND_from_AND_and_NOT.svg"
+            alt="Cấu tạo cổng NAND từ AND và NOT"
+          />
+        </div>
+        <p class="note">Hình 21.16. Cấu tạo cổng NAND từ AND và NOT.</p>
+        <div class="media" style="margin-top: 16px;">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/8/83/7400_pinout.png"
+            alt="Sơ đồ chân IC tích hợp (minh hoạ)"
+          />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/0/0a/SN74LS00N.jpg"
+            alt="IC NAND 74LS00"
+          />
+        </div>
+        <p class="note">Hình 21.17. Sơ đồ chân và IC tích hợp 4 cổng NAND (IC 74LS00).</p>
+      </div>
+      <div class="card">
+        <p class="subheading">Công dụng</p>
+        <p>Cổng NAND được sử dụng để đảo ngược trạng thái của mạch nhân logic hoặc điều khiển các tín hiệu logic trong mạch điện tử, mạch cảm biến.</p>
+      </div>
+    </section>
   </main>
 </body>
 </html>
