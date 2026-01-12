@@ -101,6 +101,7 @@
     .gate-section h2 {
       color: var(--accent-2);
       font-size: clamp(1.5rem, 2.2vw, 2rem);
+      text-align: left;
     }
 
     .gate-content {
@@ -181,6 +182,44 @@
 
     .application {
       color: var(--muted);
+    }
+
+    .and-demo {
+      display: grid;
+      gap: 12px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #111;
+    }
+
+    .and-demo svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .and-demo .led {
+      fill: #555;
+      stroke: #222;
+      stroke-width: 2;
+    }
+
+    .and-demo .led.on {
+      fill: #ffcc00;
+      filter: url(#andGlow);
+    }
+
+    .and-demo .hit {
+      fill: transparent;
+      cursor: pointer;
+    }
+
+    .and-demo .lbl {
+      font-weight: 700;
+      font-size: 18px;
+      fill: #111;
     }
   </style>
 </head>
@@ -309,6 +348,32 @@
         </div>
       </div>
       <div class="gate-media">
+        <figure class="gate-figure and-demo">
+          <svg id="andSvg" viewBox="0 0 640 240" role="img" aria-label="Mô phỏng cổng AND với đèn LED đầu vào và đầu ra">
+            <defs>
+              <filter id="andGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            <text class="lbl" x="50" y="92">A</text>
+            <text class="lbl" x="50" y="152">B</text>
+            <path d="M150 58 L260 58 A90 60 0 0 1 260 178 L150 178 Z" fill="none" stroke="#000" stroke-width="8" stroke-linejoin="round" />
+            <line x1="90" y1="88" x2="154" y2="88" stroke="#000" stroke-width="6" />
+            <line x1="90" y1="148" x2="154" y2="148" stroke="#000" stroke-width="6" />
+            <line x1="350" y1="118" x2="410" y2="118" stroke="#000" stroke-width="6" />
+            <circle id="andLedA" class="led" cx="90" cy="88" r="7"></circle>
+            <circle id="andLedB" class="led" cx="90" cy="148" r="7"></circle>
+            <circle id="andLedY" class="led" cx="410" cy="118" r="7"></circle>
+            <text class="lbl" x="430" y="122">Y</text>
+            <circle id="andHitA" class="hit" cx="90" cy="88" r="18"></circle>
+            <circle id="andHitB" class="hit" cx="90" cy="148" r="18"></circle>
+          </svg>
+          <figcaption>Hình 21.8a. Mô phỏng cổng AND với LED đầu dây ngoài</figcaption>
+        </figure>
         <figure class="gate-figure">
           <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Logic-gate-and.svg" alt="Kí hiệu cổng AND" />
           <figcaption>Hình 21.8. Kí hiệu cổng AND</figcaption>
@@ -483,5 +548,39 @@
       </div>
     </section>
   </main>
+  <script>
+    const andLedA = document.getElementById("andLedA");
+    const andLedB = document.getElementById("andLedB");
+    const andLedY = document.getElementById("andLedY");
+    const andHitA = document.getElementById("andHitA");
+    const andHitB = document.getElementById("andHitB");
+
+    let andA = 0;
+    let andB = 0;
+
+    const updateAnd = () => {
+      if (andA === 1 && andB === 1) {
+        andLedY.classList.add("on");
+      } else {
+        andLedY.classList.remove("on");
+      }
+    };
+
+    if (andHitA && andHitB) {
+      andHitA.addEventListener("click", () => {
+        andA = 1 - andA;
+        andLedA.classList.toggle("on", andA === 1);
+        updateAnd();
+      });
+
+      andHitB.addEventListener("click", () => {
+        andB = 1 - andB;
+        andLedB.classList.toggle("on", andB === 1);
+        updateAnd();
+      });
+
+      updateAnd();
+    }
+  </script>
 </body>
 </html>
