@@ -222,6 +222,14 @@
       filter: url(#norGlow);
     }
 
+    .nand-demo .led.on {
+      filter: url(#nandGlow);
+    }
+
+    .not-demo .led.on {
+      filter: url(#notGlow);
+    }
+
     .logic-demo .hit {
       fill: transparent;
       cursor: pointer;
@@ -462,6 +470,29 @@
         </div>
       </div>
       <div class="gate-media">
+        <figure class="gate-figure logic-demo">
+          <svg id="notSvg" class="not-demo" viewBox="0 0 640 240" role="img" aria-label="Mô phỏng cổng NOT với đèn LED đầu vào và đầu ra">
+            <defs>
+              <filter id="notGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            <text class="lbl" x="50" y="122">A</text>
+            <path d="M150 58 L150 178 L310 118 Z" fill="none" stroke="#000" stroke-width="8" stroke-linejoin="round" />
+            <circle cx="330" cy="118" r="10" fill="none" stroke="#000" stroke-width="8" />
+            <line x1="90" y1="118" x2="154" y2="118" stroke="#000" stroke-width="6" />
+            <line x1="340" y1="118" x2="404" y2="118" stroke="#000" stroke-width="6" />
+            <circle id="notLedA" class="led" cx="90" cy="118" r="7"></circle>
+            <circle id="notLedY" class="led" cx="404" cy="118" r="7"></circle>
+            <text class="lbl" x="424" y="122">Y</text>
+            <circle id="notHitA" class="hit" cx="90" cy="118" r="18"></circle>
+          </svg>
+          <figcaption>Hình 21.10a. Mô phỏng cổng NOT với LED đầu dây ngoài</figcaption>
+        </figure>
         <figure class="gate-figure">
           <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Logic-gate-not.svg" alt="Kí hiệu cổng NOT" />
           <figcaption>Hình 21.10. Kí hiệu cổng NOT</figcaption>
@@ -613,6 +644,33 @@
         </div>
       </div>
       <div class="gate-media">
+        <figure class="gate-figure logic-demo">
+          <svg id="nandSvg" class="nand-demo" viewBox="0 0 640 240" role="img" aria-label="Mô phỏng cổng NAND với đèn LED đầu vào và đầu ra">
+            <defs>
+              <filter id="nandGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            <text class="lbl" x="50" y="92">A</text>
+            <text class="lbl" x="50" y="152">B</text>
+            <path d="M150 58 L260 58 A90 60 0 0 1 260 178 L150 178 Z" fill="none" stroke="#000" stroke-width="8" stroke-linejoin="round" />
+            <circle cx="368" cy="118" r="10" fill="none" stroke="#000" stroke-width="8" />
+            <line x1="90" y1="88" x2="154" y2="88" stroke="#000" stroke-width="6" />
+            <line x1="90" y1="148" x2="154" y2="148" stroke="#000" stroke-width="6" />
+            <line x1="378" y1="118" x2="442" y2="118" stroke="#000" stroke-width="6" />
+            <circle id="nandLedA" class="led" cx="90" cy="88" r="7"></circle>
+            <circle id="nandLedB" class="led" cx="90" cy="148" r="7"></circle>
+            <circle id="nandLedY" class="led" cx="442" cy="118" r="7"></circle>
+            <text class="lbl" x="462" y="122">Y</text>
+            <circle id="nandHitA" class="hit" cx="90" cy="88" r="18"></circle>
+            <circle id="nandHitB" class="hit" cx="90" cy="148" r="18"></circle>
+          </svg>
+          <figcaption>Hình 21.15a. Mô phỏng cổng NAND với LED đầu dây ngoài</figcaption>
+        </figure>
         <figure class="gate-figure">
           <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Logic-gate-nand.svg" alt="Kí hiệu cổng NAND" />
           <figcaption>Hình 21.15. Kí hiệu cổng NAND</figcaption>
@@ -643,12 +701,25 @@
     const norHitA = document.getElementById("norHitA");
     const norHitB = document.getElementById("norHitB");
 
+    const nandLedA = document.getElementById("nandLedA");
+    const nandLedB = document.getElementById("nandLedB");
+    const nandLedY = document.getElementById("nandLedY");
+    const nandHitA = document.getElementById("nandHitA");
+    const nandHitB = document.getElementById("nandHitB");
+
+    const notLedA = document.getElementById("notLedA");
+    const notLedY = document.getElementById("notLedY");
+    const notHitA = document.getElementById("notHitA");
+
     let orA = 0;
     let orB = 0;
     let andA = 0;
     let andB = 0;
     let norA = 0;
     let norB = 0;
+    let nandA = 0;
+    let nandB = 0;
+    let notA = 0;
 
     const updateOr = () => {
       if (orA === 1 || orB === 1) {
@@ -671,6 +742,22 @@
         norLedY.classList.remove("on");
       } else {
         norLedY.classList.add("on");
+      }
+    };
+
+    const updateNand = () => {
+      if (nandA === 1 && nandB === 1) {
+        nandLedY.classList.remove("on");
+      } else {
+        nandLedY.classList.add("on");
+      }
+    };
+
+    const updateNot = () => {
+      if (notA === 1) {
+        notLedY.classList.remove("on");
+      } else {
+        notLedY.classList.add("on");
       }
     };
 
@@ -720,6 +807,32 @@
       });
 
       updateNor();
+    }
+
+    if (nandHitA && nandHitB) {
+      nandHitA.addEventListener("click", () => {
+        nandA = 1 - nandA;
+        nandLedA.classList.toggle("on", nandA === 1);
+        updateNand();
+      });
+
+      nandHitB.addEventListener("click", () => {
+        nandB = 1 - nandB;
+        nandLedB.classList.toggle("on", nandB === 1);
+        updateNand();
+      });
+
+      updateNand();
+    }
+
+    if (notHitA) {
+      notHitA.addEventListener("click", () => {
+        notA = 1 - notA;
+        notLedA.classList.toggle("on", notA === 1);
+        updateNot();
+      });
+
+      updateNot();
     }
   </script>
 </body>
