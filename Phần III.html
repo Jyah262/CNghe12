@@ -184,7 +184,7 @@
       color: var(--muted);
     }
 
-    .and-demo {
+    .logic-demo {
       display: grid;
       gap: 12px;
       background: #fff;
@@ -194,29 +194,40 @@
       color: #111;
     }
 
-    .and-demo svg {
+    .logic-demo svg {
       width: 100%;
       height: auto;
       display: block;
     }
 
-    .and-demo .led {
+    .logic-demo .led {
       fill: #555;
       stroke: #222;
       stroke-width: 2;
     }
 
-    .and-demo .led.on {
+    .logic-demo .led.on {
       fill: #ffcc00;
+    }
+
+    .or-demo .led.on {
+      filter: url(#orGlow);
+    }
+
+    .and-demo .led.on {
       filter: url(#andGlow);
     }
 
-    .and-demo .hit {
+    .nor-demo .led.on {
+      filter: url(#norGlow);
+    }
+
+    .logic-demo .hit {
       fill: transparent;
       cursor: pointer;
     }
 
-    .and-demo .lbl {
+    .logic-demo .lbl {
       font-weight: 700;
       font-size: 18px;
       fill: #111;
@@ -290,6 +301,38 @@
         </div>
       </div>
       <div class="gate-media">
+        <figure class="gate-figure logic-demo">
+          <svg id="orSvg" class="or-demo" viewBox="0 0 640 240" role="img" aria-label="Mô phỏng cổng OR với đèn LED đầu vào và đầu ra">
+            <defs>
+              <filter id="orGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            <text class="lbl" x="50" y="92">A</text>
+            <text class="lbl" x="50" y="152">B</text>
+            <path
+              d="M 160 58 Q 225 118 160 178 Q 250 178 315 158 Q 345 145 350 118 Q 345 91 315 78 Q 250 58 160 58 Z"
+              fill="none"
+              stroke="#000"
+              stroke-width="8"
+              stroke-linejoin="round"
+            />
+            <line x1="90" y1="88" x2="183" y2="88" stroke="#000" stroke-width="6" stroke-linecap="butt" />
+            <line x1="90" y1="148" x2="183" y2="148" stroke="#000" stroke-width="6" stroke-linecap="butt" />
+            <line x1="350" y1="118" x2="410" y2="118" stroke="#000" stroke-width="6" stroke-linecap="butt" />
+            <circle id="orLedA" class="led" cx="90" cy="88" r="7"></circle>
+            <circle id="orLedB" class="led" cx="90" cy="148" r="7"></circle>
+            <circle id="orLedY" class="led" cx="410" cy="118" r="7"></circle>
+            <text class="lbl" x="430" y="122">Y</text>
+            <circle id="orHitA" class="hit" cx="90" cy="88" r="18"></circle>
+            <circle id="orHitB" class="hit" cx="90" cy="148" r="18"></circle>
+          </svg>
+          <figcaption>Hình 21.6a. Mô phỏng cổng OR với LED đầu dây ngoài</figcaption>
+        </figure>
         <figure class="gate-figure">
           <img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Logic-gate-or.svg" alt="Kí hiệu cổng OR" />
           <figcaption>Hình 21.6. Kí hiệu cổng OR</figcaption>
@@ -348,8 +391,8 @@
         </div>
       </div>
       <div class="gate-media">
-        <figure class="gate-figure and-demo">
-          <svg id="andSvg" viewBox="0 0 640 240" role="img" aria-label="Mô phỏng cổng AND với đèn LED đầu vào và đầu ra">
+        <figure class="gate-figure logic-demo">
+          <svg id="andSvg" class="and-demo" viewBox="0 0 640 240" role="img" aria-label="Mô phỏng cổng AND với đèn LED đầu vào và đầu ra">
             <defs>
               <filter id="andGlow" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur stdDeviation="3" result="blur" />
@@ -478,6 +521,39 @@
         </div>
       </div>
       <div class="gate-media">
+        <figure class="gate-figure logic-demo">
+          <svg id="norSvg" class="nor-demo" viewBox="0 0 640 240" role="img" aria-label="Mô phỏng cổng NOR với đèn LED đầu vào và đầu ra">
+            <defs>
+              <filter id="norGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            <text class="lbl" x="50" y="92">A</text>
+            <text class="lbl" x="50" y="152">B</text>
+            <path
+              d="M 160 58 Q 225 118 160 178 Q 250 178 315 158 Q 345 145 350 118 Q 345 91 315 78 Q 250 58 160 58 Z"
+              fill="none"
+              stroke="#000"
+              stroke-width="8"
+              stroke-linejoin="round"
+            />
+            <circle cx="359" cy="118" r="10" fill="none" stroke="#000" stroke-width="8" />
+            <line x1="90" y1="88" x2="183" y2="88" stroke="#000" stroke-width="6" stroke-linecap="butt" />
+            <line x1="90" y1="148" x2="183" y2="148" stroke="#000" stroke-width="6" stroke-linecap="butt" />
+            <line x1="369" y1="118" x2="433" y2="118" stroke="#000" stroke-width="6" stroke-linecap="butt" />
+            <circle id="norLedA" class="led" cx="90" cy="88" r="7"></circle>
+            <circle id="norLedB" class="led" cx="90" cy="148" r="7"></circle>
+            <circle id="norLedY" class="led" cx="433" cy="118" r="7"></circle>
+            <text class="lbl" x="453" y="122">Y</text>
+            <circle id="norHitA" class="hit" cx="90" cy="88" r="18"></circle>
+            <circle id="norHitB" class="hit" cx="90" cy="148" r="18"></circle>
+          </svg>
+          <figcaption>Hình 21.12a. Mô phỏng cổng NOR với LED đầu dây ngoài</figcaption>
+        </figure>
         <figure class="gate-figure">
           <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Logic-gate-nor.svg" alt="Kí hiệu cổng NOR" />
           <figcaption>Hình 21.12. Kí hiệu cổng NOR</figcaption>
@@ -549,14 +625,38 @@
     </section>
   </main>
   <script>
+    const orLedA = document.getElementById("orLedA");
+    const orLedB = document.getElementById("orLedB");
+    const orLedY = document.getElementById("orLedY");
+    const orHitA = document.getElementById("orHitA");
+    const orHitB = document.getElementById("orHitB");
+
     const andLedA = document.getElementById("andLedA");
     const andLedB = document.getElementById("andLedB");
     const andLedY = document.getElementById("andLedY");
     const andHitA = document.getElementById("andHitA");
     const andHitB = document.getElementById("andHitB");
 
+    const norLedA = document.getElementById("norLedA");
+    const norLedB = document.getElementById("norLedB");
+    const norLedY = document.getElementById("norLedY");
+    const norHitA = document.getElementById("norHitA");
+    const norHitB = document.getElementById("norHitB");
+
+    let orA = 0;
+    let orB = 0;
     let andA = 0;
     let andB = 0;
+    let norA = 0;
+    let norB = 0;
+
+    const updateOr = () => {
+      if (orA === 1 || orB === 1) {
+        orLedY.classList.add("on");
+      } else {
+        orLedY.classList.remove("on");
+      }
+    };
 
     const updateAnd = () => {
       if (andA === 1 && andB === 1) {
@@ -565,6 +665,30 @@
         andLedY.classList.remove("on");
       }
     };
+
+    const updateNor = () => {
+      if (norA === 1 || norB === 1) {
+        norLedY.classList.remove("on");
+      } else {
+        norLedY.classList.add("on");
+      }
+    };
+
+    if (orHitA && orHitB) {
+      orHitA.addEventListener("click", () => {
+        orA = 1 - orA;
+        orLedA.classList.toggle("on", orA === 1);
+        updateOr();
+      });
+
+      orHitB.addEventListener("click", () => {
+        orB = 1 - orB;
+        orLedB.classList.toggle("on", orB === 1);
+        updateOr();
+      });
+
+      updateOr();
+    }
 
     if (andHitA && andHitB) {
       andHitA.addEventListener("click", () => {
@@ -580,6 +704,22 @@
       });
 
       updateAnd();
+    }
+
+    if (norHitA && norHitB) {
+      norHitA.addEventListener("click", () => {
+        norA = 1 - norA;
+        norLedA.classList.toggle("on", norA === 1);
+        updateNor();
+      });
+
+      norHitB.addEventListener("click", () => {
+        norB = 1 - norB;
+        norLedB.classList.toggle("on", norB === 1);
+        updateNor();
+      });
+
+      updateNor();
     }
   </script>
 </body>
